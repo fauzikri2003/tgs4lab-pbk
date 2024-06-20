@@ -1,26 +1,23 @@
 <template>
-  <div class="container">
-    <header class="header">
-      <h1>Header Section</h1>
-    </header>
-
+  <div class="container" :style="{ backgroundColor: backgroundColor }">
     <main class="grandchild-container">
       <h4>Grandchild Component</h4>
       <button @click="emitData">Send Data to Parent</button>
+      <button @click="changeBackground">Change Background</button>
     </main>
-
-    <footer class="footer">
-      <p>Footer Section</p>
-    </footer>
   </div>
 </template>
 
 <script>
 export default {
   name: 'GrandchildComponent',
+  props: ['backgroundColor'],
   methods: {
     emitData() {
       this.$emit('grandchildEvent', 'Data from Grandchild Component');
+    },
+    changeBackground() {
+      this.$emit('changeBackgroundColor');
     }
   }
 };
@@ -33,23 +30,11 @@ export default {
   align-items: center;
 }
 
-.header, .footer {
-  width: 100%;
-  padding: 10px;
-  background-color: #f1f1f1;
-  text-align: center;
-}
-
-.header h1, .footer p {
-  margin: 0;
-}
-
 .grandchild-container {
   padding: 10px;
   border: 1px solid #bbb;
   border-radius: 10px;
   margin: 20px;
-  background-color: #ddf;
 }
 
 h4 {
@@ -64,6 +49,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin: 5px;
 }
 
 button:hover {
